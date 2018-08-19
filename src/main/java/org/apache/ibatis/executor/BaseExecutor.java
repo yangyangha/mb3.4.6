@@ -45,6 +45,10 @@ import org.apache.ibatis.transaction.Transaction;
 import org.apache.ibatis.type.TypeHandlerRegistry;
 
 /**
+ * 设计模式：模板方法
+ * 定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。基于继承的代码复用的基本技术。
+ *
+ * 模板方法包含基本方法，模板方法。基本方法处理具体逻辑，模板方法将汇总基本方法。不同子类都是覆盖基本方法。
  * @author Clinton Begin
  */
 public abstract class BaseExecutor implements Executor {

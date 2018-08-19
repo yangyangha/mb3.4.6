@@ -16,6 +16,7 @@
 package org.apache.ibatis.executor;
 
 /**
+ * 设计模式：单例模式
  * @author Clinton Begin
  */
 public class ErrorContext {

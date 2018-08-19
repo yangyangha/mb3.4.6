@@ -16,6 +16,8 @@
 package org.apache.ibatis.logging;
 
 /**
+ * 该接口定义了Mybatis直接使用的日志方法，而Log接口具体由谁来实现呢？
+ * Mybatis提供了多种日志框架的实现，这些实现都匹配这个Log接口所定义的接口方法，最终实现了所有外部日志框架到Mybatis日志包的适配：
  * @author Clinton Begin
  */
 public interface Log {

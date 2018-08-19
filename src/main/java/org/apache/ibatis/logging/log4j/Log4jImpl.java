@@ -20,6 +20,10 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /**
+ * 设计模式：适配器模式
+ * 将一个接口转换成客户希望的另一个接口，适配器模式使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。
+ *
+ * 该实现持有了org.apache.log4j.Logger的实例，然后所有的日志方法，均委托该实例来实现。
  * @author Eduardo Macarron
  */
 public class Log4jImpl implements Log {

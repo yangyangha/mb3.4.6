@@ -36,6 +36,11 @@ public class SqlSessionFactoryBuilder {
     return build(reader, null, null);
   }
 
+  /**
+   * 使用重载方法，读取配置文件有两类方式
+   * 一类：reader字符流
+   */
+
   public SqlSessionFactory build(Reader reader, String environment) {
     return build(reader, environment, null);
   }
@@ -59,6 +64,10 @@ public class SqlSessionFactoryBuilder {
       }
     }
   }
+
+    /**
+     *  另一类：inputstream 字节流
+     */
 
   public SqlSessionFactory build(InputStream inputStream) {
     return build(inputStream, null, null);
@@ -87,7 +96,8 @@ public class SqlSessionFactoryBuilder {
       }
     }
   }
-    
+
+  //配置文件解析后得到的对象来构造sqlsessionfactory
   public SqlSessionFactory build(Configuration config) {
     return new DefaultSqlSessionFactory(config);
   }

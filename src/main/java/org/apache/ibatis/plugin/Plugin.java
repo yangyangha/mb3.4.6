@@ -26,6 +26,9 @@ import java.util.Set;
 import org.apache.ibatis.reflection.ExceptionUtil;
 
 /**
+ * 动态代理 基础之一便是反射
+ * https://www.cnblogs.com/haodawang/p/5967185.html
+ *
  * @author Clinton Begin
  */
 public class Plugin implements InvocationHandler {
@@ -66,6 +69,8 @@ public class Plugin implements InvocationHandler {
     }
   }
 
+  // 此处无关：方法签名--（主要是重载时）用来区分调用的方法 Definition: Two of the components of a method declaration comprise the method signature—the method's name and the parameter types.
+  // https://blog.csdn.net/li_xiao_dai/article/details/17420911
   private static Map<Class<?>, Set<Method>> getSignatureMap(Interceptor interceptor) {
     Intercepts interceptsAnnotation = interceptor.getClass().getAnnotation(Intercepts.class);
     // issue #251

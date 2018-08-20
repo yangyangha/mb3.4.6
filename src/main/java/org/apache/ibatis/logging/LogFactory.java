@@ -123,6 +123,8 @@ public final class LogFactory {
         runnable.run();
       } catch (Throwable t) {
         // ignore
+
+        //如果没有找到相应的实现类，只是捕捉异常并不做处理也做异常显示，继续下一步。
       }
     }
   }

@@ -83,7 +83,9 @@ public class DefaultResultSetHandler implements ResultSetHandler {
   private final ReflectorFactory reflectorFactory;
 
   // nested resultmaps
+  // 此Map用来保存当前层级内部的结果对象（一对多关系的多方对象），key为combinedKey
   private final Map<CacheKey, Object> nestedResultObjects = new HashMap<CacheKey, Object>();
+    // 此Map用来保存当前层级的根对象（一对多关系中的一方对象），key为absoluteKey
   private final Map<String, Object> ancestorObjects = new HashMap<String, Object>();
   private Object previousRowValue;
 
@@ -179,6 +181,7 @@ public class DefaultResultSetHandler implements ResultSetHandler {
   //
   // HANDLE RESULT SETS
   //
+    //对普通查询到的结果转换
   @Override
   public List<Object> handleResultSets(Statement stmt) throws SQLException {
     ErrorContext.instance().activity("handling results").object(mappedStatement.getId());

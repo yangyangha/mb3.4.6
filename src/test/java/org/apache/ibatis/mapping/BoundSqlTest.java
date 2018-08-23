@@ -27,7 +27,7 @@ import org.junit.Test;
 
 public class BoundSqlTest {
 
-  @Test
+ @Test
   public void testHasAdditionalParameter() throws Exception {
     List<ParameterMapping> params = Collections.emptyList();
     BoundSql boundSql = new BoundSql(new Configuration(), "some sql", params, new Object());
@@ -63,3 +63,11 @@ public class BoundSqlTest {
   }
 
 }
+
+//Collections.EMPTY_LIST 和 Collections.emptyList()的区别
+//Collections.EMPTY_LIST返回的是一个空的List。为什么需要空的List呢？
+// 有时候我们在函数中需要返回一个List，但是这个List是空的，如果我们直接返回null的话，调用者还需要进行null的判断，所以一般建议返回一个空的List。
+// Collections.EMPTY_LIST返回的这个空的List是不能进行添加元素这类操作的。这时候你有可能会说，我直接返回一个new ArrayList()呗，
+// 但是new ArrayList()在初始化时会占用一定的资源，所以在这种场景下，还是建议返回Collections.EMPTY_LIST。
+//Collections. emptyList()返回的也是一个空的List，
+// 它与Collections.EMPTY_LIST的唯一区别是，Collections. emptyList()支持泛型，所以在需要泛型的时候，可以使用Collections. emptyList()。

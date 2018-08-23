@@ -22,6 +22,10 @@ import java.util.List;
 import org.apache.ibatis.reflection.ArrayUtil;
 
 /**
+ * 在cache中唯一确定一个缓存项需要使用缓存项的key，Mybatis中因为涉及到动态SQL等多方面因素，其缓存项的key不能仅仅通过一个String表示，
+ * 所以MyBatis 提供了CacheKey类来表示缓存项的key，在一个CacheKey对象中可以封装多个影响缓存项的因素。
+ *
+ * 怎么样的查询条件算和上一次查询是一样的查询，从而返回同样的结果回去？这个问题，得从CacheKey说起。
  * @author Clinton Begin
  */
 public class CacheKey implements Cloneable, Serializable {
@@ -38,6 +42,7 @@ public class CacheKey implements Cloneable, Serializable {
   private long checksum;
   private int count;
   // 8/21/2017 - Sonarlint flags this as needing to be marked transient.  While true if content is not serializable, this is not always true and thus should not be marked transient.
+    //存放传入的参数
   private List<Object> updateList;
 
   public CacheKey() {
@@ -74,6 +79,10 @@ public class CacheKey implements Cloneable, Serializable {
     }
   }
 
+    /**
+     * 只要如下5个值是相同的，可认为是同一个sql，即可使用缓存。
+     * Statement Id + Offset + Limmit + Sql + Params
+     */
   @Override
   public boolean equals(Object object) {
     if (this == object) {
@@ -85,6 +94,7 @@ public class CacheKey implements Cloneable, Serializable {
 
     final CacheKey cacheKey = (CacheKey) object;
 
+      //检查hashcode checksum count是否一致，不一致肯定不equals
     if (hashcode != cacheKey.hashcode) {
       return false;
     }
@@ -95,6 +105,7 @@ public class CacheKey implements Cloneable, Serializable {
       return false;
     }
 
+      //updatelist中的元素一一对应相等,顺序也要一致
     for (int i = 0; i < updateList.size(); i++) {
       Object thisObject = updateList.get(i);
       Object thatObject = cacheKey.updateList.get(i);

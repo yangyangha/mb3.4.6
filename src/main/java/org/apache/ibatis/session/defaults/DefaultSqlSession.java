@@ -40,7 +40,9 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 /**
- *
+ * 每一个SqlSession中持有了自己的Executor，每一个Executor中有一个Local Cache。
+ * 当用户发起查询时，Mybatis会根据当前执行的MappedStatement生成一个key，去Local Cache中查询，如果缓存命中的话，返回。
+ * 如果缓存没有命中的话，则写入Local Cache，最后返回结果给用户。
  * The default implementation for {@link SqlSession}.
  * Note that this class is not Thread-Safe.
  *

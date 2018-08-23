@@ -201,7 +201,7 @@ public abstract class BaseExecutor implements Executor {
       throw new ExecutorException("Executor was closed.");
     }
     CacheKey cacheKey = new CacheKey();
-    cacheKey.update(ms.getId());
+    cacheKey.update(ms.getId());//例如 org.apache.ibatis.domain.blog.mappers.AuthorMapper.selectAuthorWithInlineParams
     cacheKey.update(rowBounds.getOffset());
     cacheKey.update(rowBounds.getLimit());
     cacheKey.update(boundSql.getSql());

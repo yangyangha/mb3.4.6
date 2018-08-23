@@ -29,6 +29,7 @@ import java.util.Set;
 
 public class BaseCacheTest {
 
+  //The cache implementation must have a constructor that receives the cache id as an String parameter.
   @Test
   public void shouldDemonstrateEqualsAndHashCodeForVariousCacheTypes() {
     PerpetualCache cache = new PerpetualCache("test_cache");

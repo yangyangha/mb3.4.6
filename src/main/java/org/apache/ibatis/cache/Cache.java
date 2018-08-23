@@ -76,6 +76,8 @@ public interface Cache {
 
   /**
    * Clears this cache instance
+   *
+   *  对于缓存数据更新机制，当某一个作用域(一级缓存Session/二级缓存Namespaces)的进行了 C/U/D 操作后，默认该作用域下所有 select 中的缓存将被clear。
    */  
   void clear();
 

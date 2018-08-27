@@ -1,6 +1,7 @@
 package org.apache.ibatis.parsing;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -13,6 +14,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.IOException;
+import java.util.Properties;
 
 /**
  * https://www.cnblogs.com/zengda/p/4765854.html
@@ -54,6 +56,10 @@ public class Test_xpath {
                 "/bookstore/book[@category='WEB']", document,
                 XPathConstants.NODE);
         System.out.println(bookWeb.getNodeName());
+
+        //获取节点属性
+        Properties attributes = new Properties();
+        NamedNodeMap attributeNodes = bookWeb.getAttributes();
 
         System.out.println("===========================================================");
 

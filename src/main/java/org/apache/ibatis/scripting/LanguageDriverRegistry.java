@@ -19,6 +19,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 从3.2版本开始，mybatis提供了LanguageDriver接口，我们可以使用该接口自定义SQL的解析方式。
+ *
+ * LanguageDriver将实际的实现根据采用的底层不同，委托给了具体的Builder，对于XML配置，委托给XMLScriptBuilder。
+ * 对于使用Velocity模板的解析器，委托给SQLScriptSource解析具体的SQL。
+ *
  * @author Frank D. Martinez [mnesarco]
  */
 public class LanguageDriverRegistry {

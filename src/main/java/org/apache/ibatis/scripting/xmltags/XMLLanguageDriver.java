@@ -29,6 +29,7 @@ import org.apache.ibatis.scripting.defaults.RawSqlSource;
 import org.apache.ibatis.session.Configuration;
 
 /**
+ * 使用注解配置sql语句没有使用xml的方式灵活和强大，为了弥补这种缺陷，XMLLanguageDriver出现了。
  * @author Eduardo Macarron
  */
 public class XMLLanguageDriver implements LanguageDriver {

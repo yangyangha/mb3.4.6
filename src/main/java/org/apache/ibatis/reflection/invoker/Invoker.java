@@ -18,6 +18,11 @@ package org.apache.ibatis.reflection.invoker;
 import java.lang.reflect.InvocationTargetException;
 
 /**
+ *
+ * https://blog.csdn.net/likewindy/article/details/51433304
+ * GetFieldInvoker，SetFieldInvoker和MethodInvoker。
+ * GetFieldInvoker和SetFieldInvoker分别调用Field的get和set用来获取和设置对象的属性值。MethodInvoker用来调用Object的的某个方法（通过方法设置对象的属性）。
+ *
  * @author Clinton Begin
  */
 public interface Invoker {

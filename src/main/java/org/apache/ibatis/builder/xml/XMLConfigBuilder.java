@@ -100,6 +100,11 @@ public class XMLConfigBuilder extends BaseBuilder {
     return configuration;
   }
 
+  /**
+   *
+   * 以下private方法为各个配置初始化
+   */
+
   private void parseConfiguration(XNode root) {
     try {
       //issue #117 read properties first

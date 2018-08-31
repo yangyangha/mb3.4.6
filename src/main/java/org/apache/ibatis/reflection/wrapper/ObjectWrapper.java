@@ -22,6 +22,7 @@ import org.apache.ibatis.reflection.factory.ObjectFactory;
 import org.apache.ibatis.reflection.property.PropertyTokenizer;
 
 /**
+ * ObjectWrapper是对对象的描述的抽象，它抽象出一系列对对象描述的查询和更新的接口
  * @author Clinton Begin
  */
 public interface ObjectWrapper {

@@ -6,6 +6,14 @@ public class User {
     private String password;
     private Integer age;
 
+    //如果增加来如下参数构造方法，就不符合javabean规范，同样mybatis解析也会报错
+//    public User(Integer id, String username, String password, Integer age) {
+//        this.id = id;
+//        this.username = username;
+//        this.password = password;
+//        this.age = age;
+//    }
+
     public String getUsername() {
         return username;
     }

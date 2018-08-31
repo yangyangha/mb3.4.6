@@ -99,7 +99,7 @@ public class Reflector {
     Map<String, List<Method>> conflictingGetters = new HashMap<String, List<Method>>();
     Method[] methods = getClassMethods(cls);
     for (Method method : methods) {
-      if (method.getParameterTypes().length > 0) {
+      if (method.getParameterTypes().length > 0) {  //not get method
         continue;
       }
       String name = method.getName();

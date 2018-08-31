@@ -23,6 +23,9 @@ import java.lang.reflect.InvocationTargetException;
  * GetFieldInvoker，SetFieldInvoker和MethodInvoker。
  * GetFieldInvoker和SetFieldInvoker分别调用Field的get和set用来获取和设置对象的属性值。MethodInvoker用来调用Object的的某个方法（通过方法设置对象的属性）。
  *
+ * 流程
+ * 准备SQL语句和参数替换、执行的基础上解释了mybatis如何利用反射获取和设置参数对象上的值。
+ * mybatis最终也是利用java的反射机制来获取和设置对象的值得。
  * @author Clinton Begin
  */
 public interface Invoker {

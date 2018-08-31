@@ -21,6 +21,7 @@ import org.apache.ibatis.reflection.wrapper.DefaultObjectWrapperFactory;
 import org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory;
 
 /**
+ * SystemMetaObject返回对象的MetaObject对象，实际上通过的MetaObject的forObject方法。
  * @author Clinton Begin
  */
 public final class SystemMetaObject {

@@ -17,7 +17,7 @@ public class DemoTest {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         User user = sqlSession.selectOne("userTest.selectUser", 1);
         System.out.println(user.getUsername());
-        User user1 = new User();
+        User user1 = new User(11,"gg","sss",12);
         user1.setId(3);user1.setAge(21);user1.setUsername("hi");user1.setPassword("hi");
         sqlSession.update("userTest.insertUser",user1);
         sqlSession.commit();

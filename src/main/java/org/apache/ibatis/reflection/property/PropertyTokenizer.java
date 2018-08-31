@@ -18,6 +18,10 @@ package org.apache.ibatis.reflection.property;
 import java.util.Iterator;
 
 /**
+ *  这个类是property包中的重量级类，该类会被reflection包中其他的类频繁的引用到。
+ *  这个类实现了Iterable和Iterator这两个接口，但在使用时经常被用到的是Iterator接口中的hasNext这个函数。
+ *
+ *
  * @author Clinton Begin
  */
 public class PropertyTokenizer implements Iterator<PropertyTokenizer> {
@@ -27,6 +31,7 @@ public class PropertyTokenizer implements Iterator<PropertyTokenizer> {
   private final String children;
 
   public PropertyTokenizer(String fullname) {
+      // 对参数进行第一次处理，通过“.”分隔符将propertyName分作两部分
     int delim = fullname.indexOf('.');
     if (delim > -1) {
       name = fullname.substring(0, delim);
@@ -36,8 +41,11 @@ public class PropertyTokenizer implements Iterator<PropertyTokenizer> {
       children = null;
     }
     indexedName = name;
+      // 对name进行二次处理,去除“[...]”，并将方括号内的内容赋给index属性，如果name属性中包含“[]”的话
     delim = name.indexOf('[');
     if (delim > -1) {
+        // 先取index内容再截取name更为方便些，要不然还需要一个临时变量，需要三步才能实现
+        // 这里包含了一个前提：传入的参数如果有有[,则必然存在],并且是属性的最后一个字符
       index = name.substring(delim + 1, name.length() - 1);
       name = name.substring(0, delim);
     }

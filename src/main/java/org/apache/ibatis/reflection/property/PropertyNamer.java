@@ -28,6 +28,7 @@ public final class PropertyNamer {
     // Prevent Instantiation of Static Class
   }
 
+  //这个方法把访问方法的名字转换成范围属性的方式，先截取了get/is和set再将首字母变成小写。
   public static String methodToProperty(String name) {
     if (name.startsWith("is")) {
       name = name.substring(2);

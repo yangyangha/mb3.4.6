@@ -27,6 +27,9 @@ import org.apache.ibatis.reflection.invoker.MethodInvoker;
 import org.apache.ibatis.reflection.property.PropertyTokenizer;
 
 /**
+ * MetaClass 同样也是获取类型的描述--Reflector.
+ * MetaClass实际上是对Reflector和ProeprtyTokenizer的一种结合，是我们可以用复杂的属性表达式来获取类型的描述。
+ *
  * @author Clinton Begin
  */
 public class MetaClass {

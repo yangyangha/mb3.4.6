@@ -50,6 +50,7 @@ public class UnpooledDataSource implements DataSource {
   private Integer defaultTransactionIsolationLevel;
 
   static {
+      //// TODO: 2018/8/30 哪个阶段自动注册了驱动？
     Enumeration<Driver> drivers = DriverManager.getDrivers();
     while (drivers.hasMoreElements()) {
       Driver driver = drivers.nextElement();

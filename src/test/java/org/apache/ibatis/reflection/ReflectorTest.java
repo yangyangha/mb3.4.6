@@ -45,10 +45,13 @@ public class ReflectorTest {
   public void shouldNotGetClass() throws Exception {
     ReflectorFactory reflectorFactory = new DefaultReflectorFactory();
     Reflector reflector = reflectorFactory.findForClass(Section.class);
-    Assert.assertFalse(reflector.hasGetter("class"));
+    Assert.assertFalse(reflector.hasGetter("properName"));
+
+    Assert.assertTrue(reflector.hasGetter("id"));
+    Assert.assertTrue(reflector.hasSetter("id"));
   }
 
-  static interface Entity<T> {
+  interface Entity<T> {
     T getId();
     void setId(T id);
   }
@@ -208,6 +211,7 @@ public class ReflectorTest {
     }
     ReflectorFactory reflectorFactory = new DefaultReflectorFactory();
     Reflector reflector = reflectorFactory.findForClass(Bean.class);
+      //// TODO: 2018/8/31 reflector: getGetInvoker --- why not getBool
     assertTrue((Boolean)reflector.getGetInvoker("bool").invoke(new Bean(), new Byte[0]));
   }
 }

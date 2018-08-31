@@ -26,6 +26,18 @@ import java.lang.reflect.WildcardType;
 import java.util.Arrays;
 
 /**
+ *TypeParameterResolver 工具类主要是对Mybatis中需要的类或者接口解析反射时，
+ * 对其复杂的泛型进行解析保存为其自定义的Type体系接口（TypeParameterResolver中有实现类），对其中的类型形参，使用类型实参表示。
+ * 然后缓存起来，方便下次使用。
+ *
+ *
+ * 在分析TypeParameterResolver工具类时，必须先要了解Java的Type体系，
+ * 其主要由 Class，ParameterizedType，GenericArrayType，TypeVariable和一个用来表示通配表达试的WildcardType类型。
+ * 这些类型都继承Type这个父接口，所以Type接口又是Java所有类型的公共接口。
+ * https://www.jianshu.com/p/423c9a8e4424
+ *
+ * point：
+ * java type体系
  * @author Iwao AVE!
  */
 public class TypeParameterResolver {
@@ -64,12 +76,21 @@ public class TypeParameterResolver {
     return result;
   }
 
+    /**
+     * WildcardType表示通配符表达式的类型 例如 ? extend Double;
+     * Class表示普通类型，即实际类型不带有类型变量的。比如Double，String等
+     * https://www.jianshu.com/p/423c9a8e4424
+     *
+     */
   private static Type resolveType(Type type, Type srcType, Class<?> declaringClass) {
     if (type instanceof TypeVariable) {
+        //TypeVariable表示类型变量。比如T, K等用来代表指定类型的类型变量。
       return resolveTypeVar((TypeVariable<?>) type, srcType, declaringClass);
     } else if (type instanceof ParameterizedType) {
+        //ParameterizedType表示参数化类型(泛型), 比如Map<K, V>, List<V>。
       return resolveParameterizedType((ParameterizedType) type, srcType, declaringClass);
     } else if (type instanceof GenericArrayType) {
+        //GenericArrayType表示参数化类型的数组，即泛型数组，比如T[] List<T>[]。
       return resolveGenericArrayType((GenericArrayType) type, srcType, declaringClass);
     } else {
       return type;

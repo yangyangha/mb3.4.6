@@ -35,6 +35,8 @@ import org.apache.ibatis.reflection.typeparam.Level1Mapper;
 import org.apache.ibatis.reflection.typeparam.Level2Mapper;
 import org.junit.Test;
 
+/**
+ */
 public class TypeParameterResolverTest {
   @Test
   public void testReturn_Lv0SimpleClass() throws Exception {

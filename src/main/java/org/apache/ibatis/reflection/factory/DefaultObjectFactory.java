@@ -31,6 +31,14 @@ import java.util.TreeSet;
 import org.apache.ibatis.reflection.ReflectionException;
 
 /**
+ * MyBatis 每次创建结果对象的新实例时，它都会使用一个对象工厂（ObjectFactory）实例来完成。
+ * 默认的对象工厂需要做的仅仅是实例化目标类，要么通过默认构造方法，要么在参数映射存在的时候通过参数构造方法来实例化。
+ * 如果想覆盖对象工厂的默认行为，则可以通过创建自己的对象工厂来实现。
+ *
+ * 默认的对象工厂需要做的仅仅是实例化目标类，要么通过默认构造方法，要么在参数映射存在的时候通过参数构造方法来实例化。它不做其他任何的处理。
+ * 如果我们想在创建实例化一个目标类的时候做点啥其他的动作，可以继承DefaultObjectFactory，覆写父类方法，并在mybatis-config.xml中注册配置这个对象工厂类。
+ * https://www.cnblogs.com/yulinfeng/p/5995200.html
+ *
  * @author Clinton Begin
  */
 public class DefaultObjectFactory implements ObjectFactory, Serializable {

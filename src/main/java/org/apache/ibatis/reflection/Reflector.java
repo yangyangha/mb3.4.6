@@ -39,6 +39,10 @@ import org.apache.ibatis.reflection.invoker.SetFieldInvoker;
 import org.apache.ibatis.reflection.property.PropertyNamer;
 
 /**
+ * Reflector的理解是 Reflector是对类的描述
+ *
+ * Reflector构造函数，所做的工作为，初始构造函数，将Class的set与get方法及参数添加到setMethods，getMethods，setTypes，getTypes对应的Map中，
+ * setMethods，getMethods Map的key属性名，value为对应的方法，然后初始化可读，可写，及大小写不明感属性集合。
  * This class represents a cached set of class definition information that
  * allows for easy mapping between property names and getter/setter methods.
  *

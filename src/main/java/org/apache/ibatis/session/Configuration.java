@@ -172,7 +172,7 @@ public class Configuration {
   }
 
   /**
-   * 初始化类型注册器
+   * 初始化类型注册器--相当于配置文件configuration所有节点需要的参数
    */
   public Configuration() {
     typeAliasRegistry.registerAlias("JDBC", JdbcTransactionFactory.class);

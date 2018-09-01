@@ -26,7 +26,10 @@ import java.lang.reflect.WildcardType;
 import java.util.Arrays;
 
 /**
- *TypeParameterResolver 工具类主要是对Mybatis中需要的类或者接口解析反射时，
+ * 工具类
+ * 提供了一系列静态方法来解析指定类中的字段、方法返回值、方法参数的类型。
+ *
+ * TypeParameterResolver 工具类主要是对Mybatis中需要的类或者接口解析反射时，
  * 对其复杂的泛型进行解析保存为其自定义的Type体系接口（TypeParameterResolver中有实现类），对其中的类型形参，使用类型实参表示。
  * 然后缓存起来，方便下次使用。
  *
@@ -47,8 +50,8 @@ public class TypeParameterResolver {
    *         they will be resolved to the actual runtime {@link Type}s.
    */
   public static Type resolveFieldType(Field field, Type srcType) {
-    Type fieldType = field.getGenericType();
-    Class<?> declaringClass = field.getDeclaringClass();
+    Type fieldType = field.getGenericType();//获取字段的声明类型
+    Class<?> declaringClass = field.getDeclaringClass();//获取字段定义所在的类的class对象
     return resolveType(fieldType, srcType, declaringClass);
   }
 
@@ -77,6 +80,7 @@ public class TypeParameterResolver {
   }
 
     /**
+     * todo:method
      * WildcardType表示通配符表达式的类型 例如 ? extend Double;
      * Class表示普通类型，即实际类型不带有类型变量的。比如Double，String等
      * https://www.jianshu.com/p/423c9a8e4424

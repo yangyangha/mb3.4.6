@@ -31,10 +31,13 @@ public interface ObjectWrapper {
 
   void set(PropertyTokenizer prop, Object value);
 
+  //查找属性表达式指定的属性
   String findProperty(String name, boolean useCamelCaseMapping);
 
+  //查找可读属性的名称集合
   String[] getGetterNames();
 
+  //查找可写属性的集合
   String[] getSetterNames();
 
   Class<?> getSetterType(String name);

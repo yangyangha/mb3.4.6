@@ -41,6 +41,9 @@ import org.apache.ibatis.reflection.property.PropertyNamer;
 /**
  * Reflector的理解是 Reflector是对类的描述
  *
+ * request：
+ * Javabean概念，1、必须存在无参构造方法，2、属性是通过getter获得的与有没有定义属性无关。
+ *
  * Reflector构造函数，所做的工作为，初始构造函数，将Class的set与get方法及参数添加到setMethods，getMethods，setTypes，getTypes对应的Map中，
  * setMethods，getMethods Map的key属性名，value为对应的方法，然后初始化可读，可写，及大小写不明感属性集合。
  * This class represents a cached set of class definition information that
@@ -51,21 +54,28 @@ import org.apache.ibatis.reflection.property.PropertyNamer;
 public class Reflector {
 
   private final Class<?> type;
+  //可读属性的名称集合，就是存在getter方法的属性
   private final String[] readablePropertyNames;
   private final String[] writeablePropertyNames;
   private final Map<String, Invoker> setMethods = new HashMap<String, Invoker>();
   private final Map<String, Invoker> getMethods = new HashMap<String, Invoker>();
+  //记录了属性相应setter方法的参数值类型，key--属性名称，value--参数类型
   private final Map<String, Class<?>> setTypes = new HashMap<String, Class<?>>();
   private final Map<String, Class<?>> getTypes = new HashMap<String, Class<?>>();
   private Constructor<?> defaultConstructor;
 
+  //记录了所有属性
   private Map<String, String> caseInsensitivePropertyMap = new HashMap<String, String>();
 
+  //解析指定的class并填充上述属性值
   public Reflector(Class<?> clazz) {
     type = clazz;
+    //查找class的默认无参构造方法
     addDefaultConstructor(clazz);
+    //初始化getMethod和getTypes集合
     addGetMethods(clazz);
     addSetMethods(clazz);
+    //处理没有getter/setter方法的字段
     addFields(clazz);
     readablePropertyNames = getMethods.keySet().toArray(new String[getMethods.keySet().size()]);
     writeablePropertyNames = setMethods.keySet().toArray(new String[setMethods.keySet().size()]);
@@ -97,6 +107,7 @@ public class Reflector {
 
   private void addGetMethods(Class<?> cls) {
     Map<String, List<Method>> conflictingGetters = new HashMap<String, List<Method>>();
+    //为什么不直接使用getDeclaredMethods()，是因为不能获得继承的方法；getMethods()不能获得私有方法
     Method[] methods = getClassMethods(cls);
     for (Method method : methods) {
       if (method.getParameterTypes().length > 0) {  //not get method
@@ -112,6 +123,7 @@ public class Reflector {
     resolveGetterConflicts(conflictingGetters);
   }
 
+  //todo：method
   private void resolveGetterConflicts(Map<String, List<Method>> conflictingGetters) {
     for (Entry<String, List<Method>> entry : conflictingGetters.entrySet()) {
       Method winner = null;
@@ -305,7 +317,7 @@ public class Reflector {
     return !(name.startsWith("$") || "serialVersionUID".equals(name) || "class".equals(name));
   }
 
-  /*
+  /**
    * This method returns an array containing all methods
    * declared in this class and any superclass.
    * We use this method, instead of the simpler Class.getMethods(),
@@ -318,7 +330,8 @@ public class Reflector {
     Map<String, Method> uniqueMethods = new HashMap<String, Method>();
     Class<?> currentClass = cls;
     while (currentClass != null && currentClass != Object.class) {
-      addUniqueMethods(uniqueMethods, currentClass.getDeclaredMethods());
+        //getDeclaredMethods能拿到类或接口的所有（不包括继承的方法），而getMethods只能拿到public方法（包括继承的类或接口的方法）
+        addUniqueMethods(uniqueMethods, currentClass.getDeclaredMethods());
 
       // we also need to look for interface methods -
       // because the class may be abstract
@@ -327,6 +340,7 @@ public class Reflector {
         addUniqueMethods(uniqueMethods, anInterface.getMethods());
       }
 
+      //父类 参考getSuperclass()定义
       currentClass = currentClass.getSuperclass();
     }
 
@@ -342,6 +356,9 @@ public class Reflector {
         // check to see if the method is already known
         // if it is known, then an extended class must have
         // overridden a method
+          //如果子类已经添加过该方法，无需再添加 -- 因为这个方法既添加类方法也添加接口方法，被用了两次，所以此处做了判断 例如再getClassMethod中有两次使用
+          //因为在getClassMethods 先用于添加class 的方法，在用于添加class的上级接口的方法，所以此处可以这样判断，但是该判断健壮性不强，需要依赖调用次序
+          //待改进：逻辑、健壮性
         if (!uniqueMethods.containsKey(signature)) {
           if (canAccessPrivateMethods()) {
             try {
@@ -357,6 +374,7 @@ public class Reflector {
     }
   }
 
+  //方法签名--返回值类型+方法名称+参数类型 returnType#methodName：parameterType1，parameterType2
   private String getSignature(Method method) {
     StringBuilder sb = new StringBuilder();
     Class<?> returnType = method.getReturnType();

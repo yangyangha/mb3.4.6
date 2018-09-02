@@ -26,16 +26,23 @@ import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.session.ResultHandler;
 
 /**
+ *
+ * 核心接口之一，完成了mybatis最核心的工作
+ * 1、创建statement对象，为sql语句绑定参数 2、执行curd操作 3、将结果映射成结果对象
+ *
  * @author Clinton Begin
  */
 public interface StatementHandler {
 
+    //从连接获取一个statement
   Statement prepare(Connection connection, Integer transactionTimeout)
       throws SQLException;
 
+  //绑定statement执行时所需的参数
   void parameterize(Statement statement)
       throws SQLException;
 
+  //批量执行sql
   void batch(Statement statement)
       throws SQLException;
 

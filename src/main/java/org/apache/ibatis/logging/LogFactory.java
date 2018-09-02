@@ -18,6 +18,11 @@ package org.apache.ibatis.logging;
 import java.lang.reflect.Constructor;
 
 /**
+ * 设计模式：适配器
+ *
+ * 创建对应日志组件适配器
+ *
+ *
  * @author Clinton Begin
  * @author Eduardo Macarron
  */
@@ -28,6 +33,7 @@ public final class LogFactory {
    */
   public static final String MARKER = "MYBATIS";
 
+  //记录使用的适配器的构造方法
   private static Constructor<? extends Log> logConstructor;
 
   static {
@@ -131,6 +137,7 @@ public final class LogFactory {
 
   private static void setImplementation(Class<? extends Log> implClass) {
     try {
+        //获取指定适配器的构造方法
       Constructor<? extends Log> candidate = implClass.getConstructor(String.class);
       Log log = candidate.newInstance(LogFactory.class.getName());
       if (log.isDebugEnabled()) {

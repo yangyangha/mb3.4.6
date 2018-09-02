@@ -30,10 +30,12 @@ import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
 /**
+ * 根据statementtype创建statementhandler接口实现
  * @author Clinton Begin
  */
 public class RoutingStatementHandler implements StatementHandler {
 
+    //真正的StatementHandler对象
   private final StatementHandler delegate;
 
   public RoutingStatementHandler(Executor executor, MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) {

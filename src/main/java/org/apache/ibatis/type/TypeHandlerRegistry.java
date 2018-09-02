@@ -49,6 +49,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.reflection.Jdk;
 
 /**
+ * 负责管理handler对象，在mybatis初始化时为所有已知的typehandler创建对象
  * @author Clinton Begin
  * @author Kazuki Shimizu
  */

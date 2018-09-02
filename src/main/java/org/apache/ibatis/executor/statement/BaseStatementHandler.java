@@ -34,6 +34,9 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.type.TypeHandlerRegistry;
 
 /**
+ * 抽象类
+ * 提供了参数绑定的方法，并没有实现curd
+ *
  * @author Clinton Begin
  */
 public abstract class BaseStatementHandler implements StatementHandler {
@@ -42,6 +45,7 @@ public abstract class BaseStatementHandler implements StatementHandler {
   protected final ObjectFactory objectFactory;
   protected final TypeHandlerRegistry typeHandlerRegistry;
   protected final ResultSetHandler resultSetHandler;
+  //使用的ParameterHandler对象，ParameterHandler主要功能是sql绑定参数值--替换占位符
   protected final ParameterHandler parameterHandler;
 
   protected final Executor executor;

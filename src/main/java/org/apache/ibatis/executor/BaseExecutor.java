@@ -63,6 +63,7 @@ public abstract class BaseExecutor implements Executor {
   protected PerpetualCache localOutputParameterCache;
   protected Configuration configuration;
 
+  //记录查询的层数
   protected int queryStack;
   private boolean closed;
 
@@ -155,6 +156,7 @@ public abstract class BaseExecutor implements Executor {
       queryStack++;
       list = resultHandler == null ? (List<E>) localCache.getObject(key) : null;
       if (list != null) {
+          //针对存储过程调用
         handleLocallyCachedOutputParameters(ms, key, parameter, boundSql);
       } else {
         list = queryFromDatabase(ms, parameter, rowBounds, resultHandler, key, boundSql);

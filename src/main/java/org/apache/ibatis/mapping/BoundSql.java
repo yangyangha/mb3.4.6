@@ -35,8 +35,12 @@ import org.apache.ibatis.session.Configuration;
  */
 public class BoundSql {
 
+  ///经过处理的sql(如:占用位符的处理、动态语句的解析if、foreach等)，注意每个 #{ }替换完之后就是一个 ?
   private final String sql;
-  private final List<ParameterMapping> parameterMappings;
+    //sql中的参数映射，只是映射，没有包含实际的值
+    // 这里的parameterMappings列表参数里的item个数, 以及每个item的属性名称等等, 都是和上面的sql中的 ? 完全一一对应的.
+    private final List<ParameterMapping> parameterMappings;
+    //客户端执行sql时传入的参数
   private final Object parameterObject;
   private final Map<String, Object> additionalParameters;
   private final MetaObject metaParameters;

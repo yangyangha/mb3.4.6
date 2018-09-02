@@ -19,6 +19,7 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 /**
+ * 提供了第三方数据源组件集成，也提供了自己的实现，分别是pooledDatasource  unpooledDatasource
  * @author Clinton Begin
  */
 public interface DataSourceFactory {

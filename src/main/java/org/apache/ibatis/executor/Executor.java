@@ -28,6 +28,16 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.transaction.Transaction;
 
 /**
+ * 根据传递的参数，完成SQL语句的动态解析，生成BoundSql对象，供StatementHandler使用；
+ * 为查询创建缓存，以提高性能；
+ * 创建JDBC的Statement连接对象，传递给StatementHandler对象，返回List查询结果；
+ *
+ *
+ * 设计模式：
+ *  使用两种模版方法、装饰模式
+ *          模板方法：BaseExecutor是抽象类，SimpleExecutor等是其具体类。
+ *          装饰模式：CachingExecutor 扮演装饰器角色。
+ *
  * @author Clinton Begin
  */
 public interface Executor {

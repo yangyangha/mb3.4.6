@@ -33,6 +33,9 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.transaction.Transaction;
 
 /**
+ * 设计模式：装饰器
+ *
+ *
  * @author Clinton Begin
  * @author Eduardo Macarron
  */

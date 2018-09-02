@@ -27,6 +27,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * mapper接口及其代理工厂的注册中心
+ *
  * @author Clinton Begin
  * @author Eduardo Macarron
  * @author Lasse Voss
@@ -34,6 +36,7 @@ import java.util.Set;
 public class MapperRegistry {
 
   private final Configuration config;
+  //记录mapper接口与对应MapperProxyFactory之间的关系
   private final Map<Class<?>, MapperProxyFactory<?>> knownMappers = new HashMap<Class<?>, MapperProxyFactory<?>>();
 
   public MapperRegistry(Configuration config) {

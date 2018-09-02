@@ -24,6 +24,8 @@ import java.util.List;
 
 /**
  * 功能：
+ * 将结果集映射成结果对象
+ *
  * 1、处理Statement执行后产生的结果集，生成结果列表；处理存储过程执行后的输出参数。
  * 其实现的步骤就是将Statement执行后的结果集，按照Mapper文件中配置的ResultType或ResultMap来封装成对应的对象，最后将封装的对象返回即可。
  *

@@ -25,6 +25,8 @@ import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 
 /**
+ * 根据指定条件查找指定包下的类
+ *
  * <p>ResolverUtil is used to locate classes that are available in the/a class path and meet
  * arbitrary conditions. The two most common conditions are that a class implements/extends
  * another class, or that is it annotated with a specific annotation. However, through the use

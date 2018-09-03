@@ -30,6 +30,8 @@ import org.apache.ibatis.cache.CacheException;
 import org.apache.ibatis.io.Resources;
 
 /**
+ * todo:序列化--cache
+ *
  * @author Clinton Begin
  */
 public class SerializedCache implements Cache {

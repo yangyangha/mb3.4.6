@@ -17,8 +17,11 @@ package org.apache.ibatis.submitted.blocking_cache;
 
 import java.io.Reader;
 import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.jdbc.ScriptRunner;
@@ -92,5 +95,39 @@ public class BlockingCacheTest {
       sqlSession1.close();
     }
   }
+
+
+    /**
+     * basic
+     */
+    //
+    @Test
+    public void testMap(){
+        //参考putIfAbsent 方法注释
+        //put putIfAbsent 都会返回map中已存在的值，但是put会替换，putIfAbset 不会替换值
+        Map<String,String> map = new HashMap<>();
+        String val = map.putIfAbsent("one","onevalue");
+        System.out.println("putIfAbsent first return "+val);
+        val = map.putIfAbsent("one","onevalue");
+        System.out.println("putIfAbsetn second return :"+val);
+        val = map.putIfAbsent("one","anotherval");
+        System.out.println("putIfAbsent third return :"+val);
+        System.out.println("putIfAbsetn value is :"+map.get("one"));
+
+        val = map.put("two","twoval");
+        System.out.println("test put return :"+val);
+    }
+
+    @Test
+    public void testReentrant(){
+        ReentrantLock lock = new ReentrantLock();
+        try {
+            //tryLock lock 区别
+            lock.tryLock();// 能不能获取都直接返回
+            lock.lock();//会一直等待
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

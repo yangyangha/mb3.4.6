@@ -24,6 +24,10 @@ import java.sql.SQLException;
 import org.apache.ibatis.reflection.ExceptionUtil;
 
 /**
+ * 设计模式
+ * 动态代理
+ *
+ *
  * @author Clinton Begin
  */
 class PooledConnection implements InvocationHandler {
@@ -36,8 +40,9 @@ class PooledConnection implements InvocationHandler {
   private final Connection realConnection;
   private final Connection proxyConnection;
   private long checkoutTimestamp;
-  private long createdTimestamp;
-  private long lastUsedTimestamp;
+  //以下两个字段用来判断连接是否过期
+  private long createdTimestamp;//创建时间
+  private long lastUsedTimestamp;//最后使用时间
   private int connectionTypeCode;
   private boolean valid;
 

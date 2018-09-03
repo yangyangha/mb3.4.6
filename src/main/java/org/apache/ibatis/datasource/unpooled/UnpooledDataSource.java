@@ -32,6 +32,7 @@ import javax.sql.DataSource;
 import org.apache.ibatis.io.Resources;
 
 /**
+ * done
  * @author Clinton Begin
  * @author Eduardo Macarron
  */
@@ -228,6 +229,7 @@ public class UnpooledDataSource implements DataSource {
     if (autoCommit != null && autoCommit != conn.getAutoCommit()) {
       conn.setAutoCommit(autoCommit);
     }
+    //todo:细节，事务隔离级别
     if (defaultTransactionIsolationLevel != null) {
       conn.setTransactionIsolation(defaultTransactionIsolationLevel);
     }

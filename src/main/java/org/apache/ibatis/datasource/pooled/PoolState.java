@@ -19,13 +19,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *
+ * 数据库连接池状态类
+ *
  * @author Clinton Begin
  */
 public class PoolState {
 
   protected PooledDataSource dataSource;
 
+  //空闲状态的数据库连接
   protected final List<PooledConnection> idleConnections = new ArrayList<PooledConnection>();
+  //活动状态的连接
   protected final List<PooledConnection> activeConnections = new ArrayList<PooledConnection>();
   protected long requestCount = 0;
   protected long accumulatedRequestTime = 0;

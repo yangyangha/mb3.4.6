@@ -20,6 +20,9 @@ import org.apache.ibatis.cache.impl.PerpetualCache;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class LruCacheTest {
 
   @Test
@@ -55,6 +58,32 @@ public class LruCacheTest {
     cache.clear();
     assertNull(cache.getObject(0));
     assertNull(cache.getObject(4));
+  }
+
+
+    /**
+     * basic test
+     */
+
+    //linkedhashmap
+    // 当put 或 putall操作后，会根据removeEldestEntry返回true自动删除最老、最少使用的元素。查看源代码
+  @Test
+    public void testLinkedHashmap(){
+
+      Map<String,String> map = new LinkedHashMap<String,String>(2,.75f,true){
+          @Override
+          protected boolean removeEldestEntry(Map.Entry<String, String> eldest) {
+              return size() > 2;
+          }
+      };
+
+      map.put("one","onevalue");
+      map.put("two","twovalue");
+      map.put("third","thirdvalue");
+
+      System.out.println(map.get("one"));
+      System.out.println(map.size());
+
   }
 
 }

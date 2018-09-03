@@ -22,13 +22,32 @@ import java.util.concurrent.locks.ReadWriteLock;
 import org.apache.ibatis.cache.Cache;
 
 /**
+ * done
+ * Lru 算法使用了linkedhashmap的数据结构
+ *
  * Lru (least recently used) cache decorator
  *
  * @author Clinton Begin
+ *
+ *
+ * linkedhashmap 简单而言就是有序的hashmap
+ * LinkedHashMap实现与HashMap的不同之处在于，后者维护着一个运行于所有条目的双重链接列表。此链接列表定义了迭代顺序，该迭代顺序可以是插入顺序或者是访问顺序。根据链表中元素的顺序可以分为：按插入顺序的链表，和按访问顺序(调用get方法)的链表。
+ * 默认是按插入顺序排序，如果指定按访问顺序排序，那么调用get方法后，会将这次访问的元素移至链表尾部，不断访问可以形成按访问顺序排序的链表。
+ *
+ * linkedlist 按插入顺序，但是没有key-value结构！
+ * https://www.cnblogs.com/whoislcj/p/5552421.html
+ * http://www.cnblogs.com/children/archive/2012/10/02/2710624.html
+ *
+ * 装填因子/加载因子/负载因子 α= 填入表中的元素个数 / 哈希表的长度
+ * 负载因子表示哈希表空间元素密度，越大表示哈希表越满，产生冲突的可能性越大
+ * 一般常用0.75
+ *
+ * todo:interview linkedhashmap 实现结构
  */
 public class LruCache implements Cache {
 
   private final Cache delegate;
+  //维护了第二份缓存，只是使用其lru算法，获取最老、最少使用的元素来删除delegate的元素；有点儿浪费了空间
   private Map<Object, Object> keyMap;
   private Object eldestKey;
 
@@ -51,6 +70,7 @@ public class LruCache implements Cache {
     keyMap = new LinkedHashMap<Object, Object>(size, .75F, true) {
       private static final long serialVersionUID = 4267176411845948333L;
 
+      //默认是返回false 即不会删除最老、使用最少的数据
       @Override
       protected boolean removeEldestEntry(Map.Entry<Object, Object> eldest) {
         boolean tooBig = size() > size;
@@ -70,7 +90,7 @@ public class LruCache implements Cache {
 
   @Override
   public Object getObject(Object key) {
-    keyMap.get(key); //touch
+    keyMap.get(key); //touch 增加一次访问，更新一次排序
     return delegate.getObject(key);
   }
 
@@ -89,6 +109,7 @@ public class LruCache implements Cache {
   public ReadWriteLock getReadWriteLock() {
     return null;
   }
+
 
   private void cycleKeyList(Object key) {
     keyMap.put(key, key);

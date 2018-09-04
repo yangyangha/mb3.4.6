@@ -36,6 +36,10 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 /**
+ * mapper完成参数的转换以及sql语句的执行功能
+ *
+ * mapper接口及xml中定义sql的桥梁
+ *
  * @author Clinton Begin
  * @author Eduardo Macarron
  * @author Lasse Voss

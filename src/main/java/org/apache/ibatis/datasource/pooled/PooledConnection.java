@@ -27,6 +27,7 @@ import org.apache.ibatis.reflection.ExceptionUtil;
  * 设计模式
  * 动态代理
  *
+ * 真正管理数据库连接池的连接
  *
  * @author Clinton Begin
  */
@@ -237,6 +238,7 @@ class PooledConnection implements InvocationHandler {
   @Override
   public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
     String methodName = method.getName();
+      //如果调用close方法，则将其重新放回连接池，而不是真正关闭连接
     if (CLOSE.hashCode() == methodName.hashCode() && CLOSE.equals(methodName)) {
       dataSource.pushConnection(this);
       return null;

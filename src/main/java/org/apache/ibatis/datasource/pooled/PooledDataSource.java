@@ -34,6 +34,7 @@ import org.apache.ibatis.logging.LogFactory;
 
 /**
  * 简单的线程安全的数据库连接池
+ *
  * This is a simple, synchronous, thread-safe database connection pool.
  *
  * @author Clinton Begin
@@ -345,6 +346,12 @@ public class PooledDataSource implements DataSource {
     return ("" + url + username + password).hashCode();
   }
 
+    /**
+     * 重新放回连接池
+     *
+     * @param conn
+     * @throws SQLException
+     */
   protected void pushConnection(PooledConnection conn) throws SQLException {
 
     synchronized (state) {

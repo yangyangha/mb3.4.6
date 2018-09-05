@@ -1,2 +1,16 @@
 反射
 https://blog.csdn.net/likewindy/article/details/51433304
+
+
+
+
+
+
+
+框架
+package-info.java 文件说明。
+此处作用：
+如果是分“包”开发，也就是说一个包实现一个业务逻辑或功能点、或模块、或组件，则需要对一个包有很好的说明，
+说明这个包是干啥的，有啥作用，版本变迁，特别说明等等
+
+https://www.cnblogs.com/pepcod/archive/2013/02/20/2918856.html

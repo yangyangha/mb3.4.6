@@ -33,14 +33,14 @@ import org.apache.ibatis.session.Configuration;
  */
 public final class MappedStatement {
 
-  private String resource;
+  private String resource;//节点中id属性（包括命名空间）
   private Configuration configuration;
   private String id;
   private Integer fetchSize;
   private Integer timeout;
   private StatementType statementType;
   private ResultSetType resultSetType;
-  private SqlSource sqlSource;
+  private SqlSource sqlSource;//对应一条sql语句
   private Cache cache;
   private ParameterMap parameterMap;
   private List<ResultMap> resultMaps;

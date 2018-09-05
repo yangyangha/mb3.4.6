@@ -48,7 +48,7 @@ public class XMLIncludeTransformer {
     if (configurationVariables != null) {
       variablesContext.putAll(configurationVariables);
     }
-    applyIncludes(source, variablesContext, false);
+    applyIncludes(source, variablesContext, false);//处理<include>子节点
   }
 
   /**

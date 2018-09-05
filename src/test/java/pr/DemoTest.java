@@ -15,7 +15,8 @@ public class DemoTest {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder()
                 .build(reader);
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        User user = sqlSession.selectOne("userTest.selectUser", 1);
+//        User user = sqlSession.selectOne("userTest.selectUser", 1);       //normal
+        User user = sqlSession.selectOne("userTest.selectUserInclude", 1);  //include
         System.out.println(user.getUsername());
         User user1 = new User();
         user1.setId(3);user1.setAge(21);user1.setUsername("hi");user1.setPassword("hi");

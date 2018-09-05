@@ -9,4 +9,16 @@
     <insert id="insertUser" parameterType="pr.demo.entity.User">
         INSERT INTO USER VALUES (#{id},#{username},#{password})
     </insert>
+
+    <sql id="includedsql">
+      FROM ${tablename}
+    </sql>
+
+    <select id="selectUserInclude" parameterType="int" resultType="pr.demo.entity.User">
+      select *
+       <include refid="includedsql">
+           <property name="tablename" value="user"/>
+       </include>
+      where id = #{id}
+    </select>
 </mapper>

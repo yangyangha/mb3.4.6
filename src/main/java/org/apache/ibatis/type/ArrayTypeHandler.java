@@ -47,6 +47,7 @@ public class ArrayTypeHandler extends BaseTypeHandler<Object> {
     return array == null ? null : array.getArray();
   }
 
+  //todo：point 存储过程
   @Override
   public Object getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
     Array array = cs.getArray(columnIndex);

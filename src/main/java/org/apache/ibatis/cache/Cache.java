@@ -18,6 +18,21 @@ package org.apache.ibatis.cache;
 import java.util.concurrent.locks.ReadWriteLock;
 
 /**
+ *
+ * https://blog.csdn.net/eson_15/article/details/51669608
+ *  https://blog.csdn.net/luanlouis/article/details/41408341
+ *
+ *  缓存查询顺序：
+ *  二级缓存 ———> 一级缓存——> 数据库
+ *
+ *  二级缓存的实现三个选择：
+ *      1、myabtis自身提供
+ *      2、用户自定义的cache接口实现
+ *      3、第三方内存缓存库的集成
+ *   二级缓存应用场景：
+ *   对于访问多的查询请求且用户对查询结果实时性要求不高，此时可采用mybatis二级缓存技术降低数据库访问量，提高访问速度，业务场景比如：耗时较高的统计分析sql、电话账单查询sql等。
+ *   要求用户每次都能查询最新的商品信息这类查询就不行了。
+ *
  * SPI for cache providers.
  * 
  * One instance of cache will be created for each namespace.

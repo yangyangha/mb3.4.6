@@ -50,6 +50,8 @@ import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.TypeHandler;
 
 /**
+ * 解析MappedStatement并将其关联到Configuration类对象
+ *
  * @author Clinton Begin
  */
 public class MapperBuilderAssistant extends BaseBuilder {

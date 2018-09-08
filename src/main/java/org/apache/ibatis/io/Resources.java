@@ -257,6 +257,7 @@ public class Resources {
    * @return The loaded class
    * @throws ClassNotFoundException If the class cannot be found (duh!)
    */
+  //todo:classloaderwrapper 的几个类加载机制  --point
   public static Class<?> classForName(String className) throws ClassNotFoundException {
     return classLoaderWrapper.classForName(className);
   }

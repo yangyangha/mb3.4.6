@@ -152,7 +152,7 @@ public class TypeAliasRegistry {
       throw new TypeException("The parameter alias cannot be null");
     }
     // issue #748
-    String key = alias.toLowerCase(Locale.ENGLISH);
+    String key = alias.toLowerCase(Locale.ENGLISH);//todo:point locale
     if (TYPE_ALIASES.containsKey(key) && TYPE_ALIASES.get(key) != null && !TYPE_ALIASES.get(key).equals(value)) {
       throw new TypeException("The alias '" + alias + "' is already mapped to the value '" + TYPE_ALIASES.get(key).getName() + "'.");
     }

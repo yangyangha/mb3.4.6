@@ -37,6 +37,7 @@ import org.apache.ibatis.logging.LogFactory;
  *
  * This is a simple, synchronous, thread-safe database connection pool.
  *
+ * todo:point 根据配置信息初始化之后，何时进行了连接的初始化？
  * @author Clinton Begin
  */
 public class PooledDataSource implements DataSource {

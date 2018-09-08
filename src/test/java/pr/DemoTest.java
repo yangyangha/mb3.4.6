@@ -8,6 +8,17 @@ import pr.demo.entity.User;
 
 import java.io.Reader;
 
+/**
+ * 1、配置文件初始化流程
+ *
+ * 2、数据源连接初始化的时机
+ *
+ * 3、缓存流程
+ *
+ * 4、插件的动态代理
+ *
+ * 源码借鉴的东西：1、设计模式 2、方法封装 3、面向接口编程 4、基础应用
+ */
 public class DemoTest {
     public static void main(String[] args) throws Exception {
         String resource = "configuration.xml";

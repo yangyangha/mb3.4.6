@@ -365,10 +365,10 @@ public class XMLConfigBuilder extends BaseBuilder {
   private void mapperElement(XNode parent) throws Exception {
     if (parent != null) {
       for (XNode child : parent.getChildren()) {
-        if ("package".equals(child.getName())) {
+        if ("package".equals(child.getName())) {  //处理package节点
           String mapperPackage = child.getStringAttribute("name");
           configuration.addMappers(mapperPackage);
-        } else {
+        } else {//处理resource、url、class属性，这三个属性互斥的
           String resource = child.getStringAttribute("resource");
           String url = child.getStringAttribute("url");
           String mapperClass = child.getStringAttribute("class");
@@ -384,7 +384,7 @@ public class XMLConfigBuilder extends BaseBuilder {
             mapperParser.parse();
           } else if (resource == null && url == null && mapperClass != null) {
             Class<?> mapperInterface = Resources.classForName(mapperClass);
-            configuration.addMapper(mapperInterface);
+            configuration.addMapper(mapperInterface);//直接向MapperRegistry中注册
           } else {
             throw new BuilderException("A mapper element may only specify a url, resource or class, but not more than one.");
           }

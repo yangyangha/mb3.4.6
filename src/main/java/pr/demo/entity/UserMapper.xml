@@ -21,4 +21,10 @@
        </include>
       where id = #{id}
     </select>
+
+    <resultMap id="testResultMap" type="pr.demo.entity.User">
+        <result property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+    </resultMap>
 </mapper>

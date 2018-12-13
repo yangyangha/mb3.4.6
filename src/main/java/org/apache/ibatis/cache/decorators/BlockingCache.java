@@ -25,6 +25,9 @@ import org.apache.ibatis.cache.Cache;
 import org.apache.ibatis.cache.CacheException;
 
 /**
+ *
+ * @point: linkedhashmap
+ *
  * Simple blocking decorator 
  * 
  * Simple and inefficient version of EhCache's BlockingCache decorator.

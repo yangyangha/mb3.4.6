@@ -7,7 +7,7 @@
     </select>
 
     <insert id="insertUser" parameterType="pr.demo.entity.User">
-        INSERT INTO USER VALUES (#{id},#{username},#{password})
+        INSERT INTO USER (username,password) VALUES (#{username},#{password})
     </insert>
 
     <sql id="includedsql">

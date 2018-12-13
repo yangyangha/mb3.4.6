@@ -22,7 +22,8 @@ import java.util.concurrent.locks.ReadWriteLock;
 import org.apache.ibatis.cache.Cache;
 
 /**
- * done
+ * @point: deque
+ *
  * FIFO (first in, first out) cache decorator
  *
  * @author Clinton Begin
